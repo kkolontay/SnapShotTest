@@ -36,8 +36,9 @@ class SnapShotTestsTests: XCTestCase {
     let hostingController = UIHostingController(rootView: viewS)
     let navController = UINavigationController(rootViewController: hostingController)
 
-    // Create a window to enable proper sheet presentation
-    let window = UIWindow(frame: UIScreen.main.bounds)
+    // Create a window scene for iOS 13+
+    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    let window = UIWindow(windowScene: windowScene!)
     window.rootViewController = navController
     window.makeKeyAndVisible()
 
@@ -52,8 +53,8 @@ class SnapShotTestsTests: XCTestCase {
     }
     wait(for: [expectation], timeout: 1.0)
 
-    // Snapshot the entire window to capture both the dimmed background and sheet
-    assertSnapshot(of: window, as: .image(on: .iPhone13, traits: .init(userInterfaceStyle: .light)))
+    // Snapshot the navigation controller with presented sheet
+    assertSnapshot(of: navController, as: .image(on: .iPhone13, traits: .init(userInterfaceStyle: .light)))
 
     window.isHidden = true
   }
@@ -84,7 +85,8 @@ class SnapShotTestsTests: XCTestCase {
     let hostingController = UIHostingController(rootView: viewS)
     let navController = UINavigationController(rootViewController: hostingController)
 
-    let window = UIWindow(frame: UIScreen.main.bounds)
+    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    let window = UIWindow(windowScene: windowScene!)
     window.rootViewController = navController
     window.makeKeyAndVisible()
 
@@ -97,7 +99,7 @@ class SnapShotTestsTests: XCTestCase {
     }
     wait(for: [expectation], timeout: 1.0)
 
-    assertSnapshot(of: window, as: .image(on: .iPhoneSe, traits: .init(userInterfaceStyle: .light)))
+    assertSnapshot(of: navController, as: .image(on: .iPhoneSe, traits: .init(userInterfaceStyle: .light)))
 
     window.isHidden = true
   }
@@ -128,7 +130,8 @@ class SnapShotTestsTests: XCTestCase {
     let hostingController = UIHostingController(rootView: viewS)
     let navController = UINavigationController(rootViewController: hostingController)
 
-    let window = UIWindow(frame: UIScreen.main.bounds)
+    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    let window = UIWindow(windowScene: windowScene!)
     window.rootViewController = navController
     window.makeKeyAndVisible()
 
@@ -141,7 +144,7 @@ class SnapShotTestsTests: XCTestCase {
     }
     wait(for: [expectation], timeout: 1.0)
 
-    assertSnapshot(of: window, as: .image(on: .iPadMini(.portrait), traits: .init(userInterfaceStyle: .light)))
+    assertSnapshot(of: navController, as: .image(on: .iPadMini(.portrait), traits: .init(userInterfaceStyle: .light)))
 
     window.isHidden = true
   }
