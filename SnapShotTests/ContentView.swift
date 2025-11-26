@@ -21,18 +21,26 @@ struct ContentView: View {
             Text("Push me")
           })
         }
-        .sheet(isPresented: $viewModel.show, content: { 
-          VStack {
-            Text("Hello, world!")
-            Button(action: {
-              viewModel.show.toggle()
-            }, label: {
-              Text("push me again")
-            })
-          }
+        .sheet(isPresented: $viewModel.show, content: {
+          SheetContentView(viewModel: viewModel)
         })
         .padding()
     }
+}
+
+struct SheetContentView: View {
+  @State var viewModel: ViewStore
+
+  var body: some View {
+    VStack {
+      Text("Hello, world!")
+      Button(action: {
+        viewModel.show.toggle()
+      }, label: {
+        Text("push me again")
+      })
+    }
+  }
 }
 
 #Preview {

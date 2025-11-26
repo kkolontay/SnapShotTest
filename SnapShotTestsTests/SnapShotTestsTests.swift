@@ -13,9 +13,14 @@ import SwiftUI
 // MARK: - Snapshot Tests
 class SnapShotTestsTests: XCTestCase {
 
+  override func invokeTest() {
+    withSnapshotTesting(record: .failed) {
+      super.invokeTest()
+    }
+  }
 
   @MainActor
-  func testSnapshot_initialState_iPhone13() {
+  func testSnapshot_mainContent_iPhone13() {
     let vm = ViewStore()
     let viewS = ContentView(viewModel: vm)
     let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
@@ -24,17 +29,16 @@ class SnapShotTestsTests: XCTestCase {
   }
 
   @MainActor
-  func testSnapshot_sheetShown_iPhone13() {
+  func testSnapshot_sheetContent_iPhone13() {
     let vm = ViewStore()
-    vm.show = true
-    let viewS = ContentView(viewModel: vm)
-    let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
+    let sheetView = SheetContentView(viewModel: vm)
+    let view = UINavigationController(rootViewController: UIHostingController(rootView: sheetView))
 
     assertSnapshot(of: view, as: .wait(for: 0.3, on: .image(on: .iPhone13)))
   }
 
   @MainActor
-  func testSnapshot_initialState_iPhoneSE() {
+  func testSnapshot_mainContent_iPhoneSE() {
     let vm = ViewStore()
     let viewS = ContentView(viewModel: vm)
     let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
@@ -43,17 +47,16 @@ class SnapShotTestsTests: XCTestCase {
   }
 
   @MainActor
-  func testSnapshot_sheetShown_iPhoneSE() {
+  func testSnapshot_sheetContent_iPhoneSE() {
     let vm = ViewStore()
-    vm.show = true
-    let viewS = ContentView(viewModel: vm)
-    let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
+    let sheetView = SheetContentView(viewModel: vm)
+    let view = UINavigationController(rootViewController: UIHostingController(rootView: sheetView))
 
     assertSnapshot(of: view, as: .wait(for: 0.3, on: .image(on: .iPhoneSe)))
   }
 
   @MainActor
-  func testSnapshot_initialState_iPadMini() {
+  func testSnapshot_mainContent_iPadMini() {
     let vm = ViewStore()
     let viewS = ContentView(viewModel: vm)
     let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
@@ -62,11 +65,10 @@ class SnapShotTestsTests: XCTestCase {
   }
 
   @MainActor
-  func testSnapshot_sheetShown_iPadMini() {
+  func testSnapshot_sheetContent_iPadMini() {
     let vm = ViewStore()
-    vm.show = true
-    let viewS = ContentView(viewModel: vm)
-    let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
+    let sheetView = SheetContentView(viewModel: vm)
+    let view = UINavigationController(rootViewController: UIHostingController(rootView: sheetView))
 
     assertSnapshot(of: view, as: .wait(for: 0.3, on: .image(on: .iPadMini(.portrait))))
   }
