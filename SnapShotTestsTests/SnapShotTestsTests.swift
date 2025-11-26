@@ -26,9 +26,9 @@ class SnapShotTestsTests: XCTestCase {
   @MainActor
   func testSnapshot_sheetShown_iPhone13() {
     let vm = ViewStore()
+    vm.show = true
     let viewS = ContentView(viewModel: vm)
     let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
-    vm.show = true
 
     assertSnapshot(of: view, as: .wait(for: 0.3, on: .image(on: .iPhone13)))
   }
@@ -45,9 +45,9 @@ class SnapShotTestsTests: XCTestCase {
   @MainActor
   func testSnapshot_sheetShown_iPhoneSE() {
     let vm = ViewStore()
+    vm.show = true
     let viewS = ContentView(viewModel: vm)
     let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
-    vm.show = true
 
     assertSnapshot(of: view, as: .wait(for: 0.3, on: .image(on: .iPhoneSe)))
   }
@@ -64,9 +64,9 @@ class SnapShotTestsTests: XCTestCase {
   @MainActor
   func testSnapshot_sheetShown_iPadMini() {
     let vm = ViewStore()
+    vm.show = true
     let viewS = ContentView(viewModel: vm)
     let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
-    vm.show = true
 
     assertSnapshot(of: view, as: .wait(for: 0.3, on: .image(on: .iPadMini(.portrait))))
   }
