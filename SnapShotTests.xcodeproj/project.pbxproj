@@ -46,11 +46,6 @@
 			path = SnapShotTestsTests;
 			sourceTree = "<group>";
 		};
-		B163BEA32ED676C900D2D004 /* SnapShotTestsUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SnapShotTestsUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +81,6 @@
 			children = (
 				B163BE8B2ED676C300D2D004 /* SnapShotTests */,
 				B163BE992ED676C900D2D004 /* SnapShotTestsTests */,
-				B163BEA32ED676C900D2D004 /* SnapShotTestsUITests */,
 				B163BE8A2ED676C300D2D004 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -164,9 +158,6 @@
 			);
 			dependencies = (
 				B163BEA22ED676C900D2D004 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				B163BEA32ED676C900D2D004 /* SnapShotTestsUITests */,
 			);
 			name = SnapShotTestsUITests;
 			packageProductDependencies = (
