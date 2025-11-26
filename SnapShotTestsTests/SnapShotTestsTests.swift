@@ -36,9 +36,15 @@ class SnapShotTestsTests: XCTestCase {
     let hostingController = UIHostingController(rootView: viewS)
     let navController = UINavigationController(rootViewController: hostingController)
 
-    // Create a window scene for iOS 13+
-    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-    let window = UIWindow(windowScene: windowScene!)
+    // Create a window for testing - use scene if available, otherwise frame
+    let window: UIWindow
+    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+      window = UIWindow(windowScene: windowScene)
+    } else {
+      // Fallback for test environment where no scene exists
+      window = UIWindow(frame: CGRect(x: 0, y: 0, width: 390, height: 844)) // iPhone 13 size
+    }
+
     window.rootViewController = navController
     window.makeKeyAndVisible()
 
@@ -85,8 +91,13 @@ class SnapShotTestsTests: XCTestCase {
     let hostingController = UIHostingController(rootView: viewS)
     let navController = UINavigationController(rootViewController: hostingController)
 
-    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-    let window = UIWindow(windowScene: windowScene!)
+    let window: UIWindow
+    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+      window = UIWindow(windowScene: windowScene)
+    } else {
+      window = UIWindow(frame: CGRect(x: 0, y: 0, width: 375, height: 667)) // iPhone SE size
+    }
+
     window.rootViewController = navController
     window.makeKeyAndVisible()
 
@@ -130,8 +141,13 @@ class SnapShotTestsTests: XCTestCase {
     let hostingController = UIHostingController(rootView: viewS)
     let navController = UINavigationController(rootViewController: hostingController)
 
-    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-    let window = UIWindow(windowScene: windowScene!)
+    let window: UIWindow
+    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+      window = UIWindow(windowScene: windowScene)
+    } else {
+      window = UIWindow(frame: CGRect(x: 0, y: 0, width: 768, height: 1024)) // iPad Mini size
+    }
+
     window.rootViewController = navController
     window.makeKeyAndVisible()
 
