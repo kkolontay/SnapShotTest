@@ -29,6 +29,36 @@ class SnapShotTestsTests: XCTestCase {
   }
 
   @MainActor
+  func testSnapshot_withSheet_iPhone13() {
+    let vm = ViewStore()
+    vm.show = true
+    let viewS = ContentView(viewModel: vm)
+    let hostingController = UIHostingController(rootView: viewS)
+    let navController = UINavigationController(rootViewController: hostingController)
+
+    // Create a window to enable proper sheet presentation
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.rootViewController = navController
+    window.makeKeyAndVisible()
+
+    // Force initial layout
+    navController.view.setNeedsLayout()
+    navController.view.layoutIfNeeded()
+
+    // Wait for sheet presentation to complete
+    let expectation = XCTestExpectation(description: "Wait for sheet presentation")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout: 1.0)
+
+    // Snapshot the entire window to capture both the dimmed background and sheet
+    assertSnapshot(of: window, as: .image(on: .iPhone13, traits: .init(userInterfaceStyle: .light)))
+
+    window.isHidden = true
+  }
+
+  @MainActor
   func testSnapshot_sheetContent_iPhone13() {
     let vm = ViewStore()
     let sheetView = SheetContentView(viewModel: vm)
@@ -47,6 +77,32 @@ class SnapShotTestsTests: XCTestCase {
   }
 
   @MainActor
+  func testSnapshot_withSheet_iPhoneSE() {
+    let vm = ViewStore()
+    vm.show = true
+    let viewS = ContentView(viewModel: vm)
+    let hostingController = UIHostingController(rootView: viewS)
+    let navController = UINavigationController(rootViewController: hostingController)
+
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.rootViewController = navController
+    window.makeKeyAndVisible()
+
+    navController.view.setNeedsLayout()
+    navController.view.layoutIfNeeded()
+
+    let expectation = XCTestExpectation(description: "Wait for sheet presentation")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout: 1.0)
+
+    assertSnapshot(of: window, as: .image(on: .iPhoneSe, traits: .init(userInterfaceStyle: .light)))
+
+    window.isHidden = true
+  }
+
+  @MainActor
   func testSnapshot_sheetContent_iPhoneSE() {
     let vm = ViewStore()
     let sheetView = SheetContentView(viewModel: vm)
@@ -62,6 +118,32 @@ class SnapShotTestsTests: XCTestCase {
     let view = UINavigationController(rootViewController: UIHostingController(rootView:viewS))
 
     assertSnapshot(of: view, as: .wait(for: 0.3, on: .image(on: .iPadMini(.portrait))))
+  }
+
+  @MainActor
+  func testSnapshot_withSheet_iPadMini() {
+    let vm = ViewStore()
+    vm.show = true
+    let viewS = ContentView(viewModel: vm)
+    let hostingController = UIHostingController(rootView: viewS)
+    let navController = UINavigationController(rootViewController: hostingController)
+
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.rootViewController = navController
+    window.makeKeyAndVisible()
+
+    navController.view.setNeedsLayout()
+    navController.view.layoutIfNeeded()
+
+    let expectation = XCTestExpectation(description: "Wait for sheet presentation")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout: 1.0)
+
+    assertSnapshot(of: window, as: .image(on: .iPadMini(.portrait), traits: .init(userInterfaceStyle: .light)))
+
+    window.isHidden = true
   }
 
   @MainActor
